@@ -140,7 +140,7 @@ class VideoPlayer:
         self.player.stop()
 
 class App:
-    def __init__(self, root, video_path, srt_path):
+    def __init__(self, root):
         self.root = root
         root.title("Entrenamiento interactivo con pistas dinámicas")
 
@@ -157,14 +157,14 @@ class App:
             return
 
         instance = vlc.Instance()
-        media = instance.media_new(video_path)
+        media = instance.media_new(self.video_path)
         media.parse()
         total_video_duration = media.get_duration() / 1000.0
 
-        self.segments = parse_srt_and_expand_gaps(srt_path, total_video_duration)
+        self.segments = parse_srt_and_expand_gaps(self.srt_path, total_video_duration)
         self.current_index = 0
 
-        self.video_player = VideoPlayer(root, video_path)
+        self.video_player = VideoPlayer(root, self.video_path)
 
         self.label = tk.Label(root, text="Escribe lo que escuchas (las letras se completan abajo):")
         self.label.pack()
@@ -283,9 +283,6 @@ class App:
             self.repeat_segment()
 
 if __name__ == "__main__":
-    video_path = "video.mp4"
-    srt_path = "subtitles.srt"
-
     root = tk.Tk()
-    app = App(root, video_path, srt_path)
+    app = App(root)
     root.mainloop()
