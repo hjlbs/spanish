@@ -2,6 +2,8 @@
 
 I made this to practice my listening comprehension. It allows you to select a video along with its subtitles and test your ability to understand what is being said. This does require that the subtitles be good for the video because both the text and the timing are important.
 
+![Example Use](https://github.com/hjlbs/spanish/blob/main/images/sample.png)
+
 # Finding videos
 
 I am not advocating anything illegal but if you have permission, you can download youtube videos that have subtitles and use that. Try googling "download youtube video" and "download youtube video subtitles" that should help you find some good stuff.
