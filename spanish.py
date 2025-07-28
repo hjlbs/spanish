@@ -156,6 +156,18 @@ class App:
             root.destroy()
             return
 
+        # Campo para ir a un segmento específico
+        skip_frame = tk.Frame(root)
+        skip_frame.pack(pady=5)
+
+        tk.Label(skip_frame, text="Ir al segmento #:").grid(row=0, column=0, padx=5)
+
+        self.skip_entry = tk.Entry(skip_frame, width=5)
+        self.skip_entry.grid(row=0, column=1, padx=5)
+
+        skip_button = tk.Button(skip_frame, text="Ir", command=self.go_to_segment)
+        skip_button.grid(row=0, column=2, padx=5)
+
         instance = vlc.Instance()
         media = instance.media_new(self.video_path)
         media.parse()
@@ -199,6 +211,19 @@ class App:
         self.answer_shown = False
 
         self.play_current_segment()
+
+    def go_to_segment(self):
+        try:
+            target = int(self.skip_entry.get())
+            if 1 <= target <= len(self.segments):
+                self.current_index = target - 1
+                self.play_current_segment()
+                self.status.config(text=f"Saltado al segmento {target}", fg="blue")
+            else:
+                self.status.config(text="Número fuera de rango", fg="red")
+        except ValueError:
+            self.status.config(text="Por favor, introduce un número válido", fg="red")
+
 
     def play_current_segment(self):
         if self.current_index < 0:
