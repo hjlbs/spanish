@@ -118,6 +118,9 @@ class VideoPlayer:
         time.sleep(0.1)
         self.player.set_time(int(start * 1000))
 
+        # Desactiva subtítulos
+        self.player.video_set_spu(-1)
+
         if self._check_thread is None or not self._check_thread.is_alive():
             self.running = True
             self._check_thread = threading.Thread(target=self._monitor_segment)
@@ -201,6 +204,15 @@ class App:
         self.skip_button = tk.Button(buttons_frame, text="Saltar", command=self.skip_segment)
         self.skip_button.grid(row=0, column=3, padx=5)
 
+        speed_frame = tk.Frame(root)
+        speed_frame.pack(pady=5)
+
+        tk.Label(speed_frame, text="Velocidad de reproducción:").grid(row=0, column=0, padx=5)
+
+        tk.Button(speed_frame, text="100%", command=lambda: self.set_speed(1.0)).grid(row=0, column=1, padx=5)
+        tk.Button(speed_frame, text="75%", command=lambda: self.set_speed(0.75)).grid(row=0, column=2, padx=5)
+        tk.Button(speed_frame, text="50%", command=lambda: self.set_speed(0.5)).grid(row=0, column=3, padx=5)
+
         self.status = tk.Label(root, text="", fg="blue")
         self.status.pack()
 
@@ -211,6 +223,10 @@ class App:
         self.answer_shown = False
 
         self.play_current_segment()
+
+    def set_speed(self, rate):
+        self.video_player.player.set_rate(rate)
+        self.status.config(text=f"Velocidad ajustada a {int(rate * 100)}%", fg="blue")
 
     def go_to_segment(self):
         try:
