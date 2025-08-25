@@ -6,7 +6,7 @@ I made this to practice my listening comprehension. It allows you to select a vi
 
 # Finding videos
 
-I am not advocating anything illegal but if you have permission, you can download youtube videos that have subtitles and use that. Try googling "download youtube video" and "download youtube video subtitles" that should help you find some good stuff. One thing to note is that this you probably shouldn't name your subtitles the same as the video because vlc will automatically load them an overlay them. For example, don't have ``video.mp4`` and ``video.srt``.
+I am not advocating anything illegal but if you have permission, you can download youtube videos that have subtitles and use that. Try googling "download youtube video" and "download youtube video subtitles" that should help you find some good stuff.
 
 There is a sample video under the directory that you can practice with.
 
